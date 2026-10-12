@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Exercise</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Retour aux exercices</a>
+        <div id="exercise-content"></div>
+        <div id="answers-section" class="hidden">
+            <h3>Écris ta réponse :</h3>
+            <form id="answer-form"></form>
+            <button id="check-button" class="check-btn">Vérifier</button>
+        </div>
+        <div id="result" class="hidden"></div>
+        <div id="ballerina" class="ballerina hidden">
+            <div class="ballerina-body">
+                <div class="dress">💃</div>
+            </div>
+            <div class="sparkles"></div>
+        </div>
+    </div>
+    <script src="js/app.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const exerciseFile = urlParams.get('file');
+        if (exerciseFile) {
+            loadExercise(exerciseFile);
+        }
+    </script>
+</body>
+</html>

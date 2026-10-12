@@ -1,0 +1,262 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Comic Sans MS', 'Arial', sans-serif;
+    background: linear-gradient(135deg, #a8e6cf 0%, #ffd3a5 50%, #fdffab 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    color: #ff6b9d;
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+h2 {
+    color: #4ecdc4;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+p {
+    color: #666;
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+.exercise-card {
+    background: #f8f9fa;
+    border: 3px solid #4ecdc4;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 15px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.exercise-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
+    background: #e8f8f6;
+}
+
+.exercise-card h3 {
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.back-link {
+    display: inline-block;
+    color: #4ecdc4;
+    text-decoration: none;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    transition: color 0.3s;
+}
+
+.back-link:hover {
+    color: #45b7aa;
+}
+
+.problem {
+    background: #fff9e6;
+    border-left: 5px solid #ffd93d;
+    padding: 15px;
+    margin: 20px 0 10px 0;
+    border-radius: 5px;
+    font-size: 1.3em;
+    line-height: 1.6;
+}
+
+.answer-input {
+    margin: 10px 0 20px 0;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    background: #f9f9f9;
+    border-radius: 10px;
+}
+
+.answer-input label {
+    font-size: 1.2em;
+    color: #333;
+    font-weight: bold;
+    min-width: 100px;
+}
+
+.answer-input input {
+    padding: 10px;
+    font-size: 1.2em;
+    border: 2px solid #4ecdc4;
+    border-radius: 10px;
+    width: 120px;
+    text-align: center;
+}
+
+.answer-input input:focus {
+    outline: none;
+    border-color: #ff6b9d;
+}
+
+.check-btn {
+    background: #ff6b9d;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.3em;
+    border-radius: 50px;
+    cursor: pointer;
+    display: block;
+    margin: 30px auto;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
+}
+
+.check-btn:hover {
+    background: #ff5c8d;
+    transform: scale(1.05);
+}
+
+.check-btn:active {
+    transform: scale(0.95);
+}
+
+.check-btn-small {
+    background: #4ecdc4;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    font-size: 1em;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.check-btn-small:hover {
+    background: #45b7aa;
+    transform: scale(1.05);
+}
+
+.hidden {
+    display: none;
+}
+
+.correct {
+    color: #28a745;
+    font-weight: bold;
+    background: #d4edda !important;
+    border-color: #28a745 !important;
+}
+
+.incorrect {
+    color: #dc3545;
+    font-weight: bold;
+    background: #f8d7da !important;
+    border-color: #dc3545 !important;
+}
+
+.result {
+    text-align: center;
+    font-size: 1.5em;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+}
+
+.result.success {
+    background: #d4edda;
+    color: #155724;
+    border: 2px solid #28a745;
+}
+
+.result.fail {
+    background: #f8d7da;
+    color: #721c24;
+    border: 2px solid #dc3545;
+}
+
+.ballerina {
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    text-align: center;
+}
+
+.ballerina-body {
+    font-size: 80px;
+    animation: spin 2s linear infinite;
+}
+
+.sparkles {
+    position: absolute;
+    top: -30px;
+    left: 0;
+    right: 0;
+}
+
+.sparkles::before,
+.sparkles::after {
+    content: '✨';
+    position: absolute;
+    font-size: 30px;
+    animation: sparkle 1s ease-in-out infinite alternate;
+}
+
+.sparkles::before {
+    left: -30px;
+    animation-delay: 0.2s;
+}
+
+.sparkles::after {
+    right: -30px;
+    animation-delay: 0.5s;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    25% {
+        transform: rotate(-15deg) scale(1.1);
+    }
+    50% {
+        transform: rotate(0deg) scale(1.2);
+    }
+    75% {
+        transform: rotate(15deg) scale(1.1);
+    }
+    100% {
+        transform: rotate(0deg) scale(1);
+    }
+}
+
+@keyframes sparkle {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
