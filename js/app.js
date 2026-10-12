@@ -14,7 +14,9 @@ const EXERCISES = [
     { file: 'multiplication.md', title: 'Multiplication',          theme: 'dots',   icon: '✖️', dancer: '🦄' },
     { file: 'problems-jardin.md', title: 'Problèmes du Jardin', theme: 'dots', icon: '🍓', dancer: '🫘' },
     { file: 'problems-ballet.md', title: 'Problèmes de Ballet', theme: 'candy', icon: '🩰', dancer: '💃' },
-    { file: 'problems-cuisine.md', title: 'Problèmes de Cuisine', theme: 'pizza', icon: '🧁', dancer: '👩‍🍳' }
+    { file: 'problems-cuisine.md', title: 'Problèmes de Cuisine', theme: 'pizza', icon: '🧁', dancer: '👩‍🍳' },
+    { file: 'problems-poudlard.md', title: 'Problèmes à Poudlard', theme: 'gryffindor', icon: '🪄', dancer: '🧙‍♂️' },
+    { file: 'problems-marina-poudlard.md', title: 'Marina à Poudlard', theme: 'gryffindor', icon: '🧙‍♀️', dancer: '🦉' }
 ];
 
 const DEFAULT_THEME = 'home';
