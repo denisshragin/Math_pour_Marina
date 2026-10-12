@@ -13,7 +13,8 @@ const EXERCISES = [
     { file: 'fractions.md',      title: 'Fractions et Nombres',    theme: 'pizza',  icon: '🍕', dancer: '🍕' },
     { file: 'multiplication.md', title: 'Multiplication',          theme: 'dots',   icon: '✖️', dancer: '🦄' },
     { file: 'problems-jardin.md', title: 'Problèmes du Jardin', theme: 'dots', icon: '🍓', dancer: '🫘' },
-    { file: 'problems-ballet.md', title: 'Problèmes de Ballet', theme: 'candy', icon: '🩰', dancer: '💃' }
+    { file: 'problems-ballet.md', title: 'Problèmes de Ballet', theme: 'candy', icon: '🩰', dancer: '💃' },
+    { file: 'problems-cuisine.md', title: 'Problèmes de Cuisine', theme: 'pizza', icon: '🧁', dancer: '👩‍🍳' }
 ];
 
 const DEFAULT_THEME = 'home';
