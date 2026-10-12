@@ -12,7 +12,8 @@ const EXERCISES = [
     { file: 'calcul-mental.md',  title: 'Calcul Mental',           theme: 'mental', icon: '⚡', dancer: '🚀' },
     { file: 'fractions.md',      title: 'Fractions et Nombres',    theme: 'pizza',  icon: '🍕', dancer: '🍕' },
     { file: 'multiplication.md', title: 'Multiplication',          theme: 'dots',   icon: '✖️', dancer: '🦄' },
-    { file: 'problems-jardin.md', title: 'Problèmes du Jardin', theme: 'dots', icon: '🍓', dancer: '🫘' }
+    { file: 'problems-jardin.md', title: 'Problèmes du Jardin', theme: 'dots', icon: '🍓', dancer: '🫘' },
+    { file: 'problems-ballet.md', title: 'Problèmes de Ballet', theme: 'candy', icon: '🩰', dancer: '💃' }
 ];
 
 const DEFAULT_THEME = 'home';
