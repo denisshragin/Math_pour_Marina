@@ -1,3 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap');
+
+/* ==========================================================
+   THEMES
+   Each theme only defines colors. Add a new one by copying a
+   block below and giving it a new data-theme name.
+   --bg      page background color
+   --title   headings (dark enough to read on white)
+   --accent  decorative borders and highlights
+   --btn     small buttons and input borders (white text on it)
+   --cta     big "check all" button (white text on it)
+   --soft    question background
+   --panel   answer row background
+   --ink     main text
+   ========================================================== */
+
+:root,
+[data-theme="home"] {
+    --bg: #dcebff;
+    --title: #c2255c;
+    --accent: #4ecdc4;
+    --btn: #1b8f87;
+    --cta: #d6336c;
+    --soft: #f1f7ff;
+    --panel: #f6f9ff;
+    --ink: #2b3342;
+}
+
+/* Problèmes : bonbons d'Halloween */
+[data-theme="candy"] {
+    --bg: #3b1f4a;
+    --title: #5b2a7a;
+    --accent: #ff8a1f;
+    --btn: #b8500a;
+    --cta: #d6336c;
+    --soft: #fff0dc;
+    --panel: #fff7ec;
+    --ink: #2b1635;
+}
+
+/* Calcul mental : vitesse et cerveau */
+[data-theme="mental"] {
+    --bg: #14213d;
+    --title: #1d4ed8;
+    --accent: #ffd60a;
+    --btn: #1d4ed8;
+    --cta: #0b7a55;
+    --soft: #eaf2ff;
+    --panel: #f2f7ff;
+    --ink: #14213d;
+}
+
+/* Fractions : pizza et gâteau */
+[data-theme="pizza"] {
+    --bg: #f6e3c3;
+    --title: #b0222d;
+    --accent: #ffc857;
+    --btn: #2f7a4b;
+    --cta: #d62839;
+    --soft: #fff3d6;
+    --panel: #fff9ec;
+    --ink: #4a2c1a;
+}
+
+/* Multiplication : tableaux de points */
+[data-theme="dots"] {
+    --bg: #e9ddff;
+    --title: #4c2d9a;
+    --accent: #ff7f6b;
+    --btn: #6c4ab6;
+    --cta: #c93f2c;
+    --soft: #f3ecff;
+    --panel: #f8f4ff;
+    --ink: #2a1b4d;
+}
+
+/* ==========================================================
+   PAGE BACKGROUNDS (decoration lives only behind the card)
+   ========================================================== */
+
 * {
     margin: 0;
     padding: 0;
@@ -5,81 +85,144 @@
 }
 
 body {
-    font-family: 'Comic Sans MS', 'Arial', sans-serif;
-    background: linear-gradient(135deg, #a8e6cf 0%, #ffd3a5 50%, #fdffab 100%);
+    font-family: 'Baloo 2', 'Nunito', 'Trebuchet MS', 'Comic Sans MS', sans-serif;
+    color: var(--ink);
+    background-color: var(--bg);
     min-height: 100vh;
     padding: 20px;
 }
 
+body[data-theme="home"] {
+    background-image: linear-gradient(135deg, #dcebff 0%, #fde7f3 100%);
+}
+
+/* Halloween : bonbons, citrouilles, fantômes */
+body[data-theme="candy"] {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><g opacity='.4'><g transform='translate(40 40) rotate(-20)'><ellipse rx='13' ry='9' fill='%23ff5fa2'/><path d='M-13 0L-24 -8L-24 8ZM13 0L24 -8L24 8Z' fill='%23ff5fa2'/></g><g transform='translate(120 100)'><ellipse rx='14' ry='12' fill='%23ff8a1f'/><rect x='-2' y='-18' width='4' height='7' fill='%23a6e22e'/></g><path transform='translate(112 30)' d='M-10 12V-2a10 10 0 0 1 20 0V12l-5-4-5 4-5-4Z' fill='%23fff4e0'/><circle cx='42' cy='118' r='8' fill='%23a6e22e'/></g></svg>");
+    background-size: 160px 160px;
+}
+
+/* Calcul mental : papier quadrillé et symboles */
+body[data-theme="mental"] {
+    background-image:
+        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><g fill='%23ffd60a' fill-opacity='.25' font-family='Arial,sans-serif' font-weight='700'><text x='30' y='60' font-size='44'>+</text><text x='150' y='50' font-size='38'>×</text><text x='90' y='150' font-size='46'>÷</text><text x='190' y='190' font-size='40'>−</text><text x='20' y='210' font-size='34'>=</text></g></svg>"),
+        linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 240px 240px, 32px 32px, 32px 32px;
+}
+
+/* Fractions : cercles coupés en parts */
+body[data-theme="pizza"] {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><g fill='none' stroke='%23e63946' stroke-opacity='.3' stroke-width='3'><circle cx='55' cy='55' r='38'/><path d='M55 17V93'/><circle cx='165' cy='60' r='30'/><path d='M165 60V30'/><circle cx='60' cy='175' r='30'/><path d='M60 145V205M30 175H90M39 154L81 196M81 154L39 196'/><circle cx='180' cy='180' r='38'/><path d='M142 180H218M180 142V218'/></g><path d='M165 60V30A30 30 0 0 1 195 60Z' fill='%23ffc857' fill-opacity='.7'/><path d='M180 180V142A38 38 0 0 1 218 180Z' fill='%23ffc857' fill-opacity='.7'/></svg>");
+    background-size: 240px 240px;
+}
+
+/* Multiplication : tableaux de points (lignes × colonnes) */
+body[data-theme="dots"] {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><g fill='%236c4ab6' fill-opacity='.45'><circle cx='20' cy='30' r='5'/><circle cx='40' cy='30' r='5'/><circle cx='60' cy='30' r='5'/><circle cx='80' cy='30' r='5'/><circle cx='20' cy='50' r='5'/><circle cx='40' cy='50' r='5'/><circle cx='60' cy='50' r='5'/><circle cx='80' cy='50' r='5'/><circle cx='20' cy='70' r='5'/><circle cx='40' cy='70' r='5'/><circle cx='60' cy='70' r='5'/><circle cx='80' cy='70' r='5'/></g><g fill='%23ff7f6b' fill-opacity='.6'><circle cx='130' cy='150' r='5'/><circle cx='150' cy='150' r='5'/><circle cx='170' cy='150' r='5'/><circle cx='190' cy='150' r='5'/><circle cx='210' cy='150' r='5'/><circle cx='130' cy='170' r='5'/><circle cx='150' cy='170' r='5'/><circle cx='170' cy='170' r='5'/><circle cx='190' cy='170' r='5'/><circle cx='210' cy='170' r='5'/></g></svg>");
+    background-size: 240px 240px;
+}
+
+/* ==========================================================
+   LAYOUT
+   ========================================================== */
+
 .container {
     max-width: 900px;
     margin: 0 auto;
-    background: white;
+    background: rgba(255, 255, 255, 0.97);
+    border: 4px solid var(--accent);
     border-radius: 20px;
     padding: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 h1 {
-    color: #ff6b9d;
+    color: var(--title);
     text-align: center;
     font-size: 2.5em;
+    font-weight: 800;
     margin-bottom: 10px;
 }
 
 h2 {
-    color: #4ecdc4;
+    color: var(--title);
     font-size: 2em;
+    font-weight: 800;
     margin-bottom: 20px;
 }
 
 p {
-    color: #666;
+    color: #555;
     text-align: center;
     font-size: 1.2em;
     margin-bottom: 30px;
 }
 
+/* ==========================================================
+   HOME PAGE: exercise cards (each card carries its own theme)
+   ========================================================== */
+
 .exercise-card {
-    background: #f8f9fa;
-    border: 3px solid #4ecdc4;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: var(--soft);
+    border: 3px solid var(--accent);
     border-radius: 15px;
-    padding: 20px;
+    padding: 18px 20px;
     margin: 15px 0;
+    color: var(--ink);
+    text-decoration: none;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .exercise-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
-    background: #e8f8f6;
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+.card-icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    font-size: 2.2em;
+    background: var(--accent);
+    border-radius: 50%;
 }
 
 .exercise-card h3 {
-    color: #333;
-    margin-bottom: 5px;
+    color: var(--title);
+    font-size: 1.5em;
+    font-weight: 700;
 }
 
 .back-link {
     display: inline-block;
-    color: #4ecdc4;
+    color: var(--title);
     text-decoration: none;
     font-size: 1.1em;
+    font-weight: 700;
     margin-bottom: 20px;
-    transition: color 0.3s;
 }
 
 .back-link:hover {
-    color: #45b7aa;
+    text-decoration: underline;
 }
 
+/* ==========================================================
+   EXERCISE PAGE
+   ========================================================== */
+
 .problem {
-    background: #fff9e6;
-    border-left: 5px solid #ffd93d;
+    background: var(--soft);
+    border-left: 6px solid var(--accent);
     padding: 15px;
     margin: 20px 0 10px 0;
-    border-radius: 5px;
+    border-radius: 6px;
     font-size: 1.3em;
     line-height: 1.6;
 }
@@ -91,21 +234,22 @@ p {
     flex-wrap: wrap;
     align-items: center;
     gap: 10px;
-    background: #f9f9f9;
+    background: var(--panel);
     border-radius: 10px;
 }
 
 .answer-input label {
     font-size: 1.2em;
-    color: #333;
-    font-weight: bold;
+    color: var(--ink);
+    font-weight: 700;
     min-width: 100px;
 }
 
 .answer-input input {
     padding: 10px;
+    font-family: inherit;
     font-size: 1.2em;
-    border: 2px solid #4ecdc4;
+    border: 2px solid var(--btn);
     border-radius: 10px;
     width: 120px;
     text-align: center;
@@ -113,25 +257,28 @@ p {
 
 .answer-input input:focus {
     outline: none;
-    border-color: #ff6b9d;
+    border-color: var(--cta);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
 }
 
 .check-btn {
-    background: #ff6b9d;
+    background: var(--cta);
     color: white;
     border: none;
     padding: 15px 40px;
+    font-family: inherit;
     font-size: 1.3em;
+    font-weight: 700;
     border-radius: 50px;
     cursor: pointer;
     display: block;
     margin: 30px auto;
-    transition: all 0.3s;
-    box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
+    transition: transform 0.2s, filter 0.2s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
 }
 
 .check-btn:hover {
-    background: #ff5c8d;
+    filter: brightness(1.1);
     transform: scale(1.05);
 }
 
@@ -140,23 +287,33 @@ p {
 }
 
 .check-btn-small {
-    background: #4ecdc4;
+    background: var(--btn);
     color: white;
     border: none;
     padding: 8px 20px;
+    font-family: inherit;
     font-size: 1em;
+    font-weight: 700;
     border-radius: 20px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: transform 0.2s, filter 0.2s;
 }
 
 .check-btn-small:hover {
-    background: #45b7aa;
+    filter: brightness(1.15);
     transform: scale(1.05);
 }
 
+.check-btn:focus-visible,
+.check-btn-small:focus-visible,
+.exercise-card:focus-visible,
+.back-link:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
+}
+
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .correct {
@@ -192,6 +349,10 @@ p {
     color: #721c24;
     border: 2px solid #dc3545;
 }
+
+/* ==========================================================
+   REWARD DANCERS
+   ========================================================== */
 
 .ballerina {
     position: fixed;
@@ -232,31 +393,43 @@ p {
     animation-delay: 0.5s;
 }
 
+.dancer-small {
+    font-size: 40px;
+    display: inline-block;
+    animation: spin 1.5s linear infinite;
+    margin-left: 10px;
+}
+
 @keyframes spin {
-    0% {
-        transform: rotate(0deg) scale(1);
-    }
-    25% {
-        transform: rotate(-15deg) scale(1.1);
-    }
-    50% {
-        transform: rotate(0deg) scale(1.2);
-    }
-    75% {
-        transform: rotate(15deg) scale(1.1);
-    }
-    100% {
-        transform: rotate(0deg) scale(1);
-    }
+    0%   { transform: rotate(0deg) scale(1); }
+    25%  { transform: rotate(-15deg) scale(1.1); }
+    50%  { transform: rotate(0deg) scale(1.2); }
+    75%  { transform: rotate(15deg) scale(1.1); }
+    100% { transform: rotate(0deg) scale(1); }
 }
 
 @keyframes sparkle {
-    from {
-        opacity: 0;
-        transform: scale(0.5);
+    from { opacity: 0; transform: scale(0.5); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ballerina-body,
+    .dancer-small,
+    .sparkles::before,
+    .sparkles::after {
+        animation: none;
     }
-    to {
-        opacity: 1;
-        transform: scale(1);
+
+    .exercise-card,
+    .check-btn,
+    .check-btn-small {
+        transition: none;
     }
+}
+
+@media (max-width: 520px) {
+    body { padding: 10px; }
+    .container { padding: 18px; }
+    h1 { font-size: 2em; }
 }

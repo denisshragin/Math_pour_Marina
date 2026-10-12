@@ -1,46 +1,86 @@
+// ------------------------------------------------------------
+// EXERCISE LIST
+// To add a new exercise: add a line here.
+//   file   : the .md file in exercises/
+//   title  : name shown on the home page
+//   theme  : home | candy | mental | pizza | dots  (see style.css)
+//   icon   : emoji shown on the home page card
+//   dancer : emoji that dances when an answer is right (optional)
+// ------------------------------------------------------------
+const EXERCISES = [
+    { file: 'problems-fr.md',    title: 'Problèmes Mathématiques', theme: 'candy',  icon: '🍬', dancer: '🧙‍♀️' },
+    { file: 'calcul-mental.md',  title: 'Calcul Mental',           theme: 'mental', icon: '⚡', dancer: '🚀' },
+    { file: 'fractions.md',      title: 'Fractions et Nombres',    theme: 'pizza',  icon: '🍕', dancer: '🍕' },
+    { file: 'multiplication.md', title: 'Multiplication',          theme: 'dots',   icon: '✖️', dancer: '🦄' },
+    { file: 'problems-jardin.md', title: 'Problèmes du Jardin', theme: 'dots', icon: '🍓', dancer: '🫘' }
+];
+
+const DEFAULT_THEME = 'home';
+const DEFAULT_DANCER = '💃';
+
+// Dancer emoji for the current page (changed per exercise in loadExercise)
+let currentDancer = DEFAULT_DANCER;
+let dancerTimer = null;
+
 // Load exercise list on index page
 function loadExerciseList() {
     const exerciseListDiv = document.getElementById('exercise-list');
     if (!exerciseListDiv) return;
-    
-    const exercises = [
-        { file: 'problems-fr.md', title: 'Problèmes Mathématiques' },
-        { file: 'calcul-mental.md', title: 'Calcul Mental' },
-        { file: 'fractions.md', title: 'Fractions et Nombres' },
-        { file: 'multiplication.md', title: 'Multiplication' }
-    ];
-    
-    exercises.forEach(ex => {
-        const card = document.createElement('div');
+
+    document.body.dataset.theme = DEFAULT_THEME;
+
+    EXERCISES.forEach(ex => {
+        // Each card is a real link (keyboard friendly) and carries its own theme colors
+        const card = document.createElement('a');
         card.className = 'exercise-card';
-        card.innerHTML = `<h3>${ex.title}</h3>`;
-        card.onclick = () => {
-            window.location.href = `exercise.html?file=${ex.file}`;
-        };
+        card.href = `exercise.html?file=${encodeURIComponent(ex.file)}`;
+        card.dataset.theme = ex.theme || DEFAULT_THEME;
+
+        const icon = document.createElement('span');
+        icon.className = 'card-icon';
+        icon.textContent = ex.icon || '📘';
+
+        const title = document.createElement('h3');
+        title.textContent = ex.title;
+
+        card.appendChild(icon);
+        card.appendChild(title);
         exerciseListDiv.appendChild(card);
     });
+}
+
+// Apply the theme (colors, background, dancer) of an exercise
+function applyTheme(filename) {
+    const ex = EXERCISES.find(e => e.file === filename);
+    document.body.dataset.theme = (ex && ex.theme) || DEFAULT_THEME;
+    currentDancer = (ex && ex.dancer) || DEFAULT_DANCER;
+
+    // Big ballerina shown after "Vérifier toutes les réponses"
+    const dress = document.querySelector('#ballerina .dress');
+    if (dress) dress.textContent = currentDancer;
 }
 
 // Parse markdown exercise and load it
 async function loadExercise(filename) {
     const contentDiv = document.getElementById('exercise-content');
-    
+    applyTheme(filename);
+
     try {
         const response = await fetch(`exercises/${filename}`);
         const text = await response.text();
-        
+
         // Parse markdown
         const parsed = parseMarkdownExercise(text);
         contentDiv.innerHTML = parsed.html;
-        
+
         // Generate answer inputs after each question
         generateAnswersAfterQuestions(parsed.problems.length);
-        
+
         // Store correct answers
         window.correctAnswers = parsed.answers;
         window.numProblems = parsed.problems.length;
     } catch (error) {
-        contentDiv.innerHTML = `<p style="color: red;">Error loading exercise: ${error}</p>`;
+        contentDiv.innerHTML = `<p style="color: red;">Error loading exercise: ${escapeHtml(String(error))}</p>`;
     }
 }
 
@@ -50,19 +90,19 @@ function parseMarkdownExercise(markdown) {
     let html = '';
     let problems = [];
     let answers = [];
-    
+
     // Extract answer line
     const answerLineIndex = lines.findIndex(line => line.toLowerCase().startsWith('answer:'));
     if (answerLineIndex !== -1) {
         const answerText = lines[answerLineIndex].substring('answer:'.length).trim();
         answers = answerText.split(',').map(a => a.trim());
     }
-    
+
     // Build HTML
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
         if (i === answerLineIndex) continue; // Skip answer line
-        
+
         // Headers
         if (line.startsWith('# ')) {
             html += `<h2>${escapeHtml(line.substring(2))}</h2>`;
@@ -78,7 +118,7 @@ function parseMarkdownExercise(markdown) {
             html += `<p>${escapeHtml(line)}</p>`;
         }
     }
-    
+
     return { html, problems, answers };
 }
 
@@ -91,7 +131,7 @@ function generateAnswersAfterQuestions(numProblems) {
             inputDiv.innerHTML = `
                 <label for="answer-${i}">Réponse ${i} :</label>
                 <input type="number" id="answer-${i}" name="answer-${i}" step="any" placeholder="...">
-                <button class="check-btn-small" onclick="checkSingleAnswer(${i})">Vérifier cette question</button>
+                <button class="check-btn-small" onclick="checkSingleAnswer(${i}, this)">Vérifier la réponse</button>
             `;
             problemDiv.parentNode.insertBefore(inputDiv, problemDiv.nextSibling);
         }
@@ -105,38 +145,52 @@ function generateAnswersAfterQuestions(numProblems) {
     contentDiv.appendChild(finalBtn);
 }
 
-function checkSingleAnswer(num) {
-    const input = document.getElementById(`answer-${num}`);
-    const ballerinaDiv = document.getElementById('ballerina');
+// Is the value typed in the input equal to the expected answer?
+function isCorrect(input, num) {
     const userVal = parseFloat(input.value);
     const correctVal = parseFloat(window.correctAnswers[num - 1]);
-    
-    if (!isNaN(userVal) && Math.abs(userVal - correctVal) < 0.0001) {
+    return !isNaN(userVal) && Math.abs(userVal - correctVal) < 0.0001;
+}
+
+function checkSingleAnswer(num, button) {
+    const input = document.getElementById(`answer-${num}`);
+
+    // Only one small dancer at a time
+    clearTimeout(dancerTimer);
+    document.querySelectorAll('.dancer-small').forEach(d => d.remove());
+
+    if (isCorrect(input, num)) {
         input.classList.add('correct');
         input.classList.remove('incorrect');
-        // Show ballerina dance for correct answer
-        ballerinaDiv.classList.remove('hidden');
-        setTimeout(() => {
-            ballerinaDiv.classList.add('hidden');
-        }, 2000);
+
+        // Small dancer next to the button for 2 seconds
+        const dancer = document.createElement('span');
+        dancer.className = 'dancer-small';
+        dancer.textContent = currentDancer;
+        button.parentNode.appendChild(dancer);
+        dancerTimer = setTimeout(() => dancer.remove(), 2000);
     } else if (input.value !== '') {
         input.classList.add('incorrect');
         input.classList.remove('correct');
+    } else {
+        input.classList.remove('correct', 'incorrect');
     }
 }
 
 function checkAllAnswers() {
     const resultDiv = document.getElementById('result');
     const ballerinaDiv = document.getElementById('ballerina');
-    
+
+    // Remove all individual dancers
+    clearTimeout(dancerTimer);
+    document.querySelectorAll('.dancer-small').forEach(d => d.remove());
+
     let correct = 0;
-    
+
     for (let i = 1; i <= window.numProblems; i++) {
         const input = document.getElementById(`answer-${i}`);
-        const userVal = parseFloat(input.value);
-        const correctVal = parseFloat(window.correctAnswers[i - 1]);
-        
-        if (!isNaN(userVal) && Math.abs(userVal - correctVal) < 0.0001) {
+
+        if (isCorrect(input, i)) {
             input.classList.add('correct');
             input.classList.remove('incorrect');
             correct++;
@@ -145,7 +199,7 @@ function checkAllAnswers() {
             input.classList.remove('correct');
         }
     }
-    
+
     // Show result
     resultDiv.classList.remove('hidden');
     if (correct === window.numProblems) {
@@ -157,7 +211,7 @@ function checkAllAnswers() {
         }, 4000);
     } else if (correct > 0) {
         resultDiv.className = 'result success';
-        resultDiv.innerHTML = `${correct} bonne(s) réponse(s) ! Continue comme ça ! 💃`;
+        resultDiv.innerHTML = `${correct} bonne(s) réponse(s) ! Continue comme ça ! ${currentDancer}`;
         ballerinaDiv.classList.remove('hidden');
         setTimeout(() => {
             ballerinaDiv.classList.add('hidden');
