@@ -17,7 +17,8 @@ const EXERCISES = [
     { file: 'problems-cuisine.md', title: 'Problèmes de Cuisine', theme: 'pizza', icon: '🧁', dancer: '👩‍🍳' },
     { file: 'problems-poudlard.md', title: 'Problèmes à Poudlard', theme: 'gryffindor', icon: '🪄', dancer: '🧙‍♂️' },
     { file: 'problems-marina-poudlard.md', title: 'Marina à Poudlard', theme: 'gryffindor', icon: '🧙‍♀️', dancer: '🦉' },
-    { file: 'problems-potions.md', title: 'Potions Magiques', theme: 'candy', icon: '🧪', dancer: '🧙‍♀️' }
+    { file: 'problems-potions.md', title: 'Potions Magiques', theme: 'candy', icon: '🧪', dancer: '🧙‍♀️' },
+    { file: 'problems-hockey.md', title: 'Problèmes de Hockey', theme: 'mental', icon: '🏒', dancer: '⛸️' }
 ];
 
 const DEFAULT_THEME = 'home';
