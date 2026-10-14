@@ -116,6 +116,30 @@
     --ink: #2b1d12;
 }
 
+/* Chats : pattes sur fond pêche */
+[data-theme="cats"] {
+    --bg: #ffd9bd;
+    --title: #9a4a05;
+    --accent: #f59e0b;
+    --btn: #b45309;
+    --cta: #0f766e;
+    --soft: #fff4e0;
+    --panel: #fff9ef;
+    --ink: #3b2412;
+}
+
+/* Bricolage : atelier, panneau perforé et outils */
+[data-theme="diy"] {
+    --bg: #d9b382;
+    --title: #8a4b08;
+    --accent: #f59f00;
+    --btn: #1e5a8a;
+    --cta: #c2410c;
+    --soft: #fdf3e0;
+    --panel: #fff8ec;
+    --ink: #3a2a18;
+}
+
 /* ==========================================================
    PAGE BACKGROUNDS (decoration lives only behind the card)
    ========================================================== */
@@ -193,6 +217,20 @@ body[data-theme="dino"] {
     background-position: right bottom, 0 0, center;
     background-size: 300px 200px, 200px 200px, cover;
     background-attachment: fixed, scroll, fixed;
+}
+
+/* Chats : pattes sur fond pêche */
+body[data-theme="cats"] {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><g fill='%23b45309' fill-opacity='.3'><g transform='translate(45 55) rotate(-20)'><ellipse cy='6' rx='13' ry='10'/><ellipse cx='-14' cy='-8' rx='5' ry='7'/><ellipse cx='-5' cy='-16' rx='5' ry='7'/><ellipse cx='6' cy='-16' rx='5' ry='7'/><ellipse cx='15' cy='-8' rx='5' ry='7'/></g><g transform='translate(115 125) rotate(20) scale(.8)'><ellipse cy='6' rx='13' ry='10'/><ellipse cx='-14' cy='-8' rx='5' ry='7'/><ellipse cx='-5' cy='-16' rx='5' ry='7'/><ellipse cx='6' cy='-16' rx='5' ry='7'/><ellipse cx='15' cy='-8' rx='5' ry='7'/></g></g></svg>");
+    background-size: 160px 160px;
+}
+
+/* Bricolage : panneau perforé avec marteau, règle et tournevis */
+body[data-theme="diy"] {
+    background-image:
+        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><g opacity='.9'><g transform='translate(60 70) rotate(-35)'><rect x='-3' y='-5' width='6' height='44' fill='%238b5a2b'/><rect x='-14' y='-14' width='28' height='10' rx='2' fill='%236b7280'/></g><g transform='translate(160 160) rotate(20)'><rect x='-40' y='-7' width='80' height='14' fill='%23ffc300'/><path d='M-32 -7v6M-20 -7v9M-8 -7v6M4 -7v9M16 -7v6M28 -7v9' stroke='%23333' stroke-width='1.5'/></g><g transform='translate(170 55) rotate(60)'><rect x='-5' y='-30' width='10' height='22' rx='4' fill='%23e63946'/><rect x='-1.5' y='-8' width='3' height='34' fill='%239ca3af'/></g></g></svg>"),
+        radial-gradient(circle, rgba(60, 40, 20, 0.4) 3px, transparent 3.5px);
+    background-size: 240px 240px, 28px 28px;
 }
 
 /* ==========================================================
@@ -504,4 +542,63 @@ p {
     body { padding: 10px; }
     .container { padding: 18px; }
     h1 { font-size: 2em; }
+}
+
+/* ==========================================================
+   PERSONALIZED EXERCISE FORM (home page)
+   ========================================================== */
+
+.generator {
+    background: var(--soft);
+    border: 3px solid var(--accent);
+    border-radius: 15px;
+    padding: 20px;
+    margin: 10px 0 30px;
+}
+
+.generator h2 {
+    font-size: 1.5em;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.generator form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.generator label {
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+.generator input,
+.generator select {
+    font-family: inherit;
+    font-size: 1.2em;
+    padding: 10px;
+    border: 2px solid var(--btn);
+    border-radius: 10px;
+    background: white;
+    color: var(--ink);
+}
+
+.generator input:focus,
+.generator select:focus {
+    outline: none;
+    border-color: var(--cta);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+}
+
+.generator .check-btn {
+    margin: 16px auto 0;
+}
+
+.list-title {
+    text-align: center;
+    font-size: 1.4em;
+    margin: 10px 0;
 }
